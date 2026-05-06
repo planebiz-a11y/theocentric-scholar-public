@@ -73,7 +73,7 @@ async function callAnthropic(apiMessages) {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-opus-4-5-20251101',
+        model: 'claude-opus-4-5',
         max_tokens: 2000,
         system: SYSTEM_PROMPT,
         messages: apiMessages
