@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Theocentric Scholar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--g:#C9A84C;--gl:#E8C97A;--gd:#7A6030;--d:#0D0B08;--d2:#13110D;--d3:#1C1914;--t:#EAE0C8;--td:#9A8F78;--pd:#C8BC9E;--r:#8B2020}
+body{background:var(--d);color:var(--t);font-family:'EB Garamond',serif;font-size:16px;line-height:1.7;min-height:100vh}
+body.light{--d:#F0EBE0;--d2:#E8E2D5;--d3:#DDD6C5;--t:#1A1208;--td:#5C4A28;--pd:#1A1208;--gd:#9A7A30}
+.lw{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#1C1710,var(--d))}
+.lb{width:380px;text-align:center;padding:3rem 2.5rem;border:1px solid var(--gd);background:var(--d2);position:relative}
+.lb:before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,168,76,.15);pointer-events:none}
+.ls{font-size:1.4rem;color:var(--g);letter-spacing:.5rem;margin-bottom:1.5rem;display:block}
+.lt{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;color:var(--g);letter-spacing:.1em;margin-bottom:.3rem}
+.lsub{font-style:italic;color:var(--td);font-size:.9rem;margin-bottom:2rem}
+.lb input{width:100%;padding:.75rem 1rem;background:var(--d3);border:1px solid var(--gd);color:var(--t);font-family:'EB Garamond',serif;font-size:1rem;margin-bottom:1rem;outline:none;text-align:center;letter-spacing:.15em}
+.lb input:focus{border-color:var(--g)}
+.gbtn{background:var(--g);color:#0D0B08;border:none;padding:.75rem 2rem;font-family:'Cinzel',serif;font-size:.85rem;font-weight:600;letter-spacing:.15em;cursor:pointer;text-transform:uppercase;width:100%}
+.gbtn:hover{background:var(--gl)}
+.app{display:none;flex-direction:column;height:100vh;overflow:hidden}
+.app.on{display:flex}
+.top{background:var(--d2);border-bottom:1px solid rgba(201,168,76,.2);padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.tl{display:flex;align-items:center;gap:.75rem}
+.at{font-family:'Cinzel',serif;font-size:.85rem;font-weight:900;color:var(--g);letter-spacing:.1em}
+.ib{background:none;border:1px solid var(--gd);color:var(--td);font-size:.6rem;padding:.2rem .5rem;cursor:pointer;font-family:'Cinzel',serif;letter-spacing:.08em;text-transform:uppercase;transition:all .2s}
+.ib:hover{border-color:var(--g);color:var(--g)}
+.tabs{background:var(--d2);border-bottom:1px solid rgba(201,168,76,.12);display:flex;overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch}
+.tab{padding:.65rem 1.1rem;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;color:var(--td);cursor:pointer;border-bottom:2px solid transparent;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.tab:hover{color:var(--g)}
+.tab.on{color:var(--g);border-bottom-color:var(--g)}
+.body{display:flex;flex:1;overflow:hidden}
+.sb{width:280px;background:var(--d2);border-right:1px solid rgba(201,168,76,.2);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;transition:width .3s}
+.sb.closed{width:0}
+.sbi{width:280px;display:flex;flex-direction:column;height:100%;overflow:hidden}
+.sbv{font-style:italic;color:var(--td);font-size:.72rem;padding:.5rem 1rem;border-bottom:1px solid rgba(201,168,76,.08);flex-shrink:0}
+.sbs{padding:.45rem 1rem;font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.18em;color:var(--gd);text-transform:uppercase;border-bottom:1px solid rgba(201,168,76,.08);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.sbb{background:none;border:1px solid var(--gd);color:var(--g);font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.08em;padding:.12rem .35rem;cursor:pointer;text-transform:uppercase;white-space:nowrap}
+.sbb:hover{background:var(--g);color:#0D0B08}
+.hl{max-height:120px;overflow-y:auto;border-bottom:1px solid rgba(201,168,76,.08);flex-shrink:0}
+.hi{display:flex;align-items:center;padding:.35rem 1rem;border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer;gap:.25rem}
+.hi:hover{background:rgba(201,168,76,.05)}
+.hi.cur{border-left:2px solid var(--g)}
+.hn{font-size:.7rem;color:var(--pd);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd{font-size:.58rem;color:var(--td);flex-shrink:0}
+.hx{background:none;border:none;color:var(--r);cursor:pointer;font-size:.7rem;opacity:0;padding:0 .1rem;flex-shrink:0}
+.hi:hover .hx{opacity:.5}
+.hx:hover{opacity:1!important}
+.noh{padding:.5rem 1rem;color:var(--td);font-style:italic;font-size:.75rem}
+.dl{flex:1;overflow-y:auto;min-height:0}
+.di{display:flex;align-items:center;padding:.4rem 1rem;border-bottom:1px solid rgba(255,255,255,.03);gap:.25rem}
+.di:hover{background:rgba(201,168,76,.04)}
+.dn{font-size:.75rem;color:var(--pd);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dd{font-size:.62rem;color:var(--td);flex-shrink:0}
+.dx{background:none;border:none;color:var(--r);cursor:pointer;font-size:.75rem;opacity:.3;flex-shrink:0}
+.dx:hover{opacity:1}
+.nod{padding:1rem;color:var(--td);font-style:italic;font-size:.8rem;text-align:center}
+.ua{padding:.6rem 1rem;border-top:1px solid rgba(201,168,76,.15);flex-shrink:0}
+.dz{border:1px dashed var(--gd);padding:.5rem;text-align:center;margin-bottom:.35rem;transition:all .2s}
+.dz.ov,.sdz.ov{border-color:var(--g);background:rgba(201,168,76,.06)}
+.dzi{color:var(--gd);font-size:.85rem;margin-bottom:.1rem}
+.dzt{color:var(--td);font-size:.7rem;margin-bottom:.2rem}
+.bbr{background:transparent;border:1px solid var(--gd);color:var(--g);font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.08em;padding:.2rem .45rem;cursor:pointer;text-transform:uppercase}
+.bbr:hover{background:var(--g);color:#0D0B08}
+.ust{font-size:.7rem;color:var(--g);font-style:italic;min-height:.85rem;text-align:center;margin-bottom:.2rem}
+.ua input[type=text],.ua textarea{width:100%;background:var(--d3);border:1px solid rgba(201,168,76,.2);color:var(--t);font-family:'EB Garamond',serif;font-size:.82rem;padding:.35rem .6rem;margin-bottom:.3rem;outline:none;resize:vertical}
+.ua input[type=text]:focus,.ua textarea:focus{border-color:var(--g)}
+.ua textarea{height:55px}
+.adb{width:100%;background:transparent;border:1px solid var(--gd);color:var(--g);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;padding:.3rem;cursor:pointer;text-transform:uppercase;margin-bottom:.3rem}
+.adb:hover{background:var(--g);color:#0D0B08}
+.crow{display:flex;gap:.3rem;margin-bottom:.3rem}
+.crow button{flex:1;background:transparent;border:1px solid var(--gd);color:var(--td);font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.06em;padding:.25rem;cursor:pointer;text-transform:uppercase}
+.crow button:hover{border-color:var(--g);color:var(--g)}
+.lob{width:100%;background:none;border:none;border-top:1px solid rgba(201,168,76,.1);color:var(--td);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;padding:.45rem;cursor:pointer;text-transform:uppercase}
+.lob:hover{color:var(--g)}
+.pa{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.pn{display:none;flex:1;flex-direction:column;overflow:hidden}
+.pn.on{display:flex}
+.ca{flex:1;overflow-y:auto;padding:1.25rem 2rem;display:flex;flex-direction:column;gap:1rem}
+.wc{max-width:500px;margin:auto;text-align:center;padding:2rem 1rem}
+.wci{font-size:1.8rem;color:var(--gd);margin-bottom:.9rem}
+.wc h2{font-family:'Cinzel',serif;color:var(--g);font-size:1rem;margin-bottom:.65rem;letter-spacing:.08em}
+.wc p{color:var(--td);font-style:italic;line-height:1.8;font-size:.9rem}
+.msg{max-width:800px;line-height:1.8}
+.my{align-self:flex-end;background:var(--d3);border:1px solid rgba(201,168,76,.2);padding:.8rem 1.1rem;font-style:italic;color:var(--pd);border-radius:2px 2px 0 2px}
+.ms{align-self:flex-start;background:var(--d2);border-left:3px solid var(--g);padding:.9rem 1.1rem .9rem 1.3rem;color:var(--t);border-radius:0 2px 2px 0}
+.ml{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.15em;color:var(--gd);text-transform:uppercase;margin-bottom:.4rem}
+.ms p{margin-bottom:.65rem}
+.ms p:last-child{margin-bottom:0}
+.tk{display:flex;align-items:center;gap:.5rem;color:var(--td);font-style:italic;font-size:.88rem;padding:.2rem 0}
+.dots span{display:inline-block;width:5px;height:5px;background:var(--g);border-radius:50%;animation:dot 1.2s infinite;margin:0 2px}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.ir{padding:.85rem 2rem;border-top:1px solid rgba(201,168,76,.12);display:flex;gap:.65rem;align-items:flex-end;flex-shrink:0}
+.ir textarea{flex:1;background:var(--d3);border:1px solid rgba(201,168,76,.25);color:var(--t);font-family:'EB Garamond',serif;font-size:1rem;padding:.65rem .9rem;resize:none;outline:none;height:50px;line-height:1.5;transition:border-color .2s}
+.ir textarea:focus{border-color:var(--g)}
+.akb{background:var(--g);border:none;color:#0D0B08;font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;letter-spacing:.12em;padding:0 1.25rem;height:50px;cursor:pointer;text-transform:uppercase}
+.akb:hover{background:var(--gl)}
+.akb:disabled{opacity:.4;cursor:not-allowed}
+.sp,.scp{flex:1;overflow-y:auto;padding:1.5rem 2rem;display:flex;flex-direction:column;gap:.85rem}
+.wp{flex:1;overflow-y:auto;padding:1.5rem 2rem;display:flex;flex-direction:column;gap:.85rem}
+.ph{font-family:'Cinzel',serif;color:var(--g);font-size:.95rem;letter-spacing:.1em}
+.sr{display:flex;gap:.65rem;flex-wrap:wrap}
+.sr input{flex:1;min-width:200px;background:var(--d3);border:1px solid rgba(201,168,76,.25);color:var(--t);font-family:'EB Garamond',serif;font-size:1rem;padding:.65rem .9rem;outline:none}
+.sr input:focus{border-color:var(--g)}
+.gb{background:var(--g);border:none;color:#0D0B08;font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:0 1.25rem;cursor:pointer;text-transform:uppercase;height:50px}
+.gb:hover{background:var(--gl)}
+.gb:disabled{opacity:.4;cursor:not-allowed}
+.res{background:var(--d2);border-left:3px solid var(--g);padding:1rem 1.25rem;color:var(--t);line-height:1.8;display:none}
+.res p,.wo p,.scr p{margin-bottom:.65rem}
+.res p:last-child,.wo p:last-child,.scr p:last-child{margin-bottom:0}
+.wt{display:flex;gap:.4rem;flex-wrap:wrap}
+.wtb{background:transparent;border:1px solid var(--gd);color:var(--g);font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;padding:.35rem .8rem;cursor:pointer;text-transform:uppercase;transition:all .2s}
+.wtb:hover{background:var(--g);color:#0D0B08}
+.wtb:disabled{opacity:.4;cursor:not-allowed}
+.wc2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;flex:1;min-height:350px}
+.wl{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.15em;color:var(--gd);text-transform:uppercase;margin-bottom:.3rem}
+.wp textarea{width:100%;height:100%;background:var(--d3);border:1px solid rgba(201,168,76,.2);color:var(--t);font-family:'EB Garamond',serif;font-size:.92rem;padding:.85rem;outline:none;resize:none;line-height:1.7}
+.wp textarea:focus{border-color:var(--g)}
+.wo{background:var(--d2);border:1px solid rgba(201,168,76,.15);padding:.85rem;overflow-y:auto;line-height:1.8;color:var(--t);font-size:.92rem;height:100%}
+.scd{color:var(--td);font-style:italic;font-size:.9rem;line-height:1.7}
+.sdz{border:1px dashed var(--gd);padding:1.25rem;text-align:center;cursor:pointer;transition:all .2s}
+.sdz p{color:var(--td);font-size:.88rem;margin-bottom:.5rem}
+.slo{background:var(--d3);border:1px solid rgba(201,168,76,.2);padding:.5rem .85rem;font-size:.82rem;color:var(--g);display:none}
+.scr{background:var(--d2);border-left:3px solid var(--r);padding:1rem 1.25rem;color:var(--t);line-height:1.8;display:none}
+.ov2{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:199}
+.ov2.on{display:block}
+@media(max-width:768px){
+  .sb{position:fixed;top:0;left:-290px;height:100vh;z-index:200;transition:left .3s;width:290px}
+  .sb.open{left:0;box-shadow:4px 0 20px rgba(0,0,0,.6)}
+  .ca,.sp,.wp,.scp{padding:1rem}
+  .ir{padding:.65rem 1rem}
+  .wc2{grid-template-columns:1fr}
+  .sr{flex-direction:column}
+  .msg{max-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="lw" id="LW">
+  <div class="lb">
+    <span class="ls">&#10022; &#10022; &#10022;</span>
+    <div class="lt">The Theocentric Scholar</div>
+    <div class="lsub">Private Research Console &mdash; fixedearthlds.com</div>
+    <input type="password" id="PI" placeholder="Enter passphrase">
+    <button class="gbtn" id="LB">Enter</button>
+  </div>
+</div>
+<div class="ov2" id="OV"></div>
+<div class="app" id="APP">
+  <div class="top">
+    <div class="tl">
+      <button class="ib" id="SBT">&#9776;</button>
+      <span class="at">The Theocentric Scholar</span>
+    </div>
+    <div style="display:flex;gap:.5rem">
+      <button class="ib" id="THB">Light</button>
+      <button class="ib" id="ECB">Export Chat</button>
+      <button class="ib" id="LOB">Log Out</button>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" data-p="CP">Scholar</div>
+    <div class="tab" data-p="SP">Scripture</div>
+    <div class="tab" data-p="WP">Writing</div>
+    <div class="tab" data-p="SCP">Scanner</div>
+  </div>
+  <div class="body">
+    <div class="sb" id="SB">
+      <div class="sbi">
+        <div class="sbv">"The earth abideth for ever." &mdash; Eccl. 1:4</div>
+        <div class="sbs"><span>Conversations</span><button class="sbb" id="NCB">+ New</button></div>
+        <div class="hl" id="HL"></div>
+        <div class="sbs"><span>Your Documents</span></div>
+        <div class="dl" id="DL"></div>
+        <div class="ua">
+          <div class="dz" id="DZ">
+            <div class="dzi">&#10022;</div>
+            <div class="dzt">Drop .docx &middot; .pdf &middot; .txt</div>
+            <input type="file" id="FI" accept=".txt,.pdf,.docx" style="display:none">
+            <button class="bbr" id="BR">Browse</button>
+          </div>
+          <div class="ust" id="US"></div>
+          <input type="text" id="DT" placeholder="Document title&hellip;">
+          <textarea id="DC" placeholder="Or paste text here&hellip;"></textarea>
+          <button class="adb" id="ADB">+ Add to Corpus</button>
+          <div class="crow">
+            <button id="EXP">&#8595; Export Corpus</button>
+            <button id="IMP">&#8593; Import Corpus</button>
+            <input type="file" id="II" accept=".json" style="display:none">
+          </div>
+          <button class="lob" id="LOB2">&#10022; Log Out</button>
+        </div>
+      </div>
+    </div>
+    <div class="pa">
+      <div class="pn on" id="CP">
+        <div class="ca" id="CA"></div>
+        <div class="ir">
+          <textarea id="QI" placeholder="Ask the Scholar&hellip; (Enter to send, Shift+Enter for new line)"></textarea>
+          <button class="akb" id="AKB">Ask</button>
+        </div>
+      </div>
+      <div class="pn" id="SP">
+        <div class="sp">
+          <div class="ph">Scripture Quick-Lookup</div>
+          <div class="sr">
+            <input type="text" id="SRI" placeholder="e.g. Abraham 3:4 &nbsp;&middot;&nbsp; D&amp;C 88:12 &nbsp;&middot;&nbsp; Genesis 1:16">
+            <button class="gb" id="LUB">Look Up</button>
+          </div>
+          <div class="res" id="SRR"></div>
+        </div>
+      </div>
+      <div class="pn" id="WP">
+        <div class="wp">
+          <div class="ph">Writing Mode</div>
+          <div class="wt">
+            <button class="wtb" id="WS">Strengthen</button>
+            <button class="wtb" id="WF">Find Weaknesses</button>
+            <button class="wtb" id="WV">Match My Voice</button>
+            <button class="wtb" id="WC">Critic Test</button>
+          </div>
+          <div class="wc2">
+            <div style="display:flex;flex-direction:column">
+              <div class="wl">Your Draft</div>
+              <textarea id="DI" placeholder="Paste your draft here&hellip;" style="flex:1"></textarea>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div class="wl">Scholar's Response</div>
+              <div class="wo" id="WO"><p style="color:var(--td);font-style:italic">Paste a draft and choose an action above.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pn" id="SCP">
+        <div class="scp">
+          <div class="ph">Document Scanner</div>
+          <p class="scd">Drop a single document here. The Scanner finds every place where the argument weakens, concedes ground to heliocentrism, uses language a critic could exploit, or contradicts your other work &mdash; and provides specific edits and fixes.</p>
+          <div class="sdz" id="SDZ">
+            <p>Drop a .docx, .pdf, or .txt file here</p>
+            <input type="file" id="SFI" accept=".txt,.pdf,.docx" style="display:none">
+            <button class="bbr" id="SBR">Browse</button>
+          </div>
+          <div class="slo" id="SLO"></div>
+          <button class="gb" id="SCB" disabled>Scan Document</button>
+          <div class="scr" id="SCR"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var pw='',docs=JSON.parse(localStorage.getItem('td')||'[]'),sid=null,msgs=[],light=localStorage.getItem('th')==='l',scanC='',scanT='';
+
+function theme(){document.body.classList.toggle('light',light);document.getElementById('THB').textContent=light?'Dark':'Light';}
+
+function getSess(){try{return JSON.parse(localStorage.getItem('ts')||'[]');}catch(e){return[];}}
+function setSess(s){localStorage.setItem('ts',JSON.stringify(s));}
+function saveSess(){
+  if(!sid||!msgs.length)return;
+  var ss=getSess(),f=null;
+  for(var i=0;i<msgs.length;i++){if(msgs[i].r==='user'){f=msgs[i];break;}}
+  var name=f?f.d.slice(0,50):'Conversation';
+  var idx=-1;for(var j=0;j<ss.length;j++){if(ss[j].id===sid){idx=j;break;}}
+  var s={id:sid,name:name,date:new Date().toLocaleDateString(),messages:msgs};
+  if(idx>=0)ss[idx]=s;else ss.unshift(s);
+  setSess(ss.slice(0,200));
+}
+function loadSess(id){
+  saveSess();
+  var ss=getSess(),s=null;for(var i=0;i<ss.length;i++){if(ss[i].id===id){s=ss[i];break;}}
+  if(!s)return;
+  sid=id;msgs=s.messages;
+  var ca=document.getElementById('CA');ca.innerHTML='';
+  for(var j=0;j<msgs.length;j++)addMsg(msgs[j].r==='user'?'you':'sch',msgs[j].d);
+  renderH();switchP('CP');
+}
+function delSess(id){
+  if(!confirm('Delete?'))return;
+  var ss=getSess().filter(function(s){return s.id!==id;});setSess(ss);
+  if(sid===id)newChat();else renderH();
+}
+function newChat(){
+  saveSess();sid='s'+Date.now();msgs=[];
+  var ca=document.getElementById('CA');ca.innerHTML='';
+  var d=document.createElement('div');d.className='wc';
+  d.innerHTML='<div class="wci">&#10022;</div><h2>Welcome, Ez</h2><p>Upload your documents in the sidebar, then ask anything. The Scholar draws on your corpus and the full LDS canon to answer, strengthen arguments, and go deeper.</p>';
+  ca.appendChild(d);renderH();
+}
+function renderH(){
+  var hl=document.getElementById('HL'),ss=getSess();
+  if(!ss.length){hl.innerHTML='<div class="noh">No conversations yet.</div>';return;}
+  hl.innerHTML='';
+  for(var i=0;i<ss.length;i++){
+    var s=ss[i];
+    var item=document.createElement('div');item.className='hi'+(s.id===sid?' cur':'');
+    item.innerHTML='<span class="hn">'+esc(s.name)+'</span><span class="hd">'+s.date+'</span><button class="hx">&#10005;</button>';
+    (function(sid2){
+      item.addEventListener('click',function(e){if(!e.target.classList.contains('hx'))loadSess(sid2);});
+      item.querySelector('.hx').addEventListener('click',function(e){e.stopPropagation();delSess(sid2);});
+    })(s.id);
+    hl.appendChild(item);
+  }
+}
+
+function login(){
+  var p=document.getElementById('PI').value;if(!p)return;
+  pw=p;sessionStorage.setItem('tp',p);
+  document.getElementById('LW').style.display='none';
+  document.getElementById('APP').classList.add('on');
+  sid='s'+Date.now();renderDocs();renderH();newChat();
+}
+function logout(){
+  saveSess();pw='';sessionStorage.removeItem('tp');
+  document.getElementById('APP').classList.remove('on');
+  document.getElementById('LW').style.display='flex';
+  document.getElementById('PI').value='';
+}
+function switchP(id){
+  document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('.tab').forEach(function(t){if(t.dataset.p===id)t.classList.add('on');});
+}
+
+function renderDocs(){
+  var dl=document.getElementById('DL');
+  if(!docs.length){dl.innerHTML='<div class="nod">No documents yet.</div>';return;}
+  dl.innerHTML='';
+  for(var i=0;i<docs.length;i++){
+    var d=docs[i];
+    var item=document.createElement('div');item.className='di';
+    item.innerHTML='<span class="dn" title="'+esc(d.t)+'">'+esc(d.t)+'</span><span class="dd">'+d.a+'</span><button class="dx">&#10005;</button>';
+    (function(did){item.querySelector('.dx').addEventListener('click',function(){delDoc(did);});})(d.id);
+    dl.appendChild(item);
+  }
+}
+function addDoc(){
+  var t=document.getElementById('DT').value.trim(),c=document.getElementById('DC').value.trim();
+  if(!t||!c){alert('Enter title and content.');return;}
+  docs.push({id:'d'+Date.now(),t:t,c:c,a:new Date().toLocaleDateString()});
+  localStorage.setItem('td',JSON.stringify(docs));
+  document.getElementById('DT').value='';document.getElementById('DC').value='';
+  setStat('Added: '+t);renderDocs();
+}
+function delDoc(id){
+  if(!confirm('Remove?'))return;
+  docs=docs.filter(function(d){return d.id!==id;});
+  localStorage.setItem('td',JSON.stringify(docs));renderDocs();
+}
+function exportCorpus(){
+  if(!docs.length){alert('No documents.');return;}
+  dlFile('ts-corpus-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(docs,null,2),'application/json');
+}
+function importCorpus(file){
+  var r=new FileReader();
+  r.onload=function(e){
+    try{
+      var imp=JSON.parse(e.target.result);if(!Array.isArray(imp))throw new Error('Invalid');
+      var n=0;
+      for(var i=0;i<imp.length;i++){
+        var d=imp[i];var exists=false;
+        for(var j=0;j<docs.length;j++){if(docs[j].t===d.t){exists=true;break;}}
+        if(d.t&&d.c&&!exists){docs.push(d);n++;}
+      }
+      localStorage.setItem('td',JSON.stringify(docs));renderDocs();setStat('Imported '+n+' doc(s).');
+    }catch(e){alert('Import failed: '+e.message);}
+  };r.readAsText(file);
+}
+function exportChat(){
+  if(!msgs.length){alert('No conversation to export.');return;}
+  var t='THE THEOCENTRIC SCHOLAR\n'+new Date().toLocaleDateString()+'\n'+'='.repeat(40)+'\n\n';
+  for(var i=0;i<msgs.length;i++){var m=msgs[i];t+=(m.r==='user'?'EZ:\n':'THE SCHOLAR:\n')+m.d+'\n\n'+(m.r!=='user'?'-'.repeat(30)+'\n\n':'');}
+  dlFile('scholar-chat-'+new Date().toISOString().slice(0,10)+'.txt',t,'text/plain');
+}
+function dlFile(name,content,type){
+  var b=new Blob([content],{type:type}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=name;a.click();
+}
+function setStat(m){var e=document.getElementById('US');e.textContent=m;if(m)setTimeout(function(){e.textContent='';},3000);}
+
+function procFile(file,onDone,onStat){
+  var ext=file.name.split('.').pop().toLowerCase();
+  if(onStat)onStat('Reading '+file.name+'...');
+  if(ext==='txt'){
+    file.text().then(function(t){onDone(t.trim(),file.name);}).catch(function(e){if(onStat)onStat('Error: '+e.message);});
+  }else if(ext==='pdf'){
+    file.arrayBuffer().then(function(ab){
+      var go=function(){
+        return window.pdfjsLib.getDocument({data:ab}).promise.then(function(pdf){
+          var pages=[];for(var i=1;i<=pdf.numPages;i++)pages.push(i);
+          return pages.reduce(function(ch,n){return ch.then(function(t){return pdf.getPage(n).then(function(pg){return pg.getTextContent().then(function(c){return t+c.items.map(function(s){return s.str;}).join(' ')+'\n\n';});});});},Promise.resolve(''));
+        }).then(function(t){onDone(t.trim(),file.name);});
+      };
+      if(window.pdfjsLib)return go();
+      return loadSc('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js').then(function(){
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';return go();
+      });
+    }).catch(function(e){if(onStat)onStat('Error: '+e.message);});
+  }else if(ext==='docx'){
+    file.arrayBuffer().then(function(ab){
+      var go=function(){return window.mammoth.extractRawText({arrayBuffer:ab}).then(function(r){onDone(r.value.trim(),file.name);});};
+      if(window.mammoth)return go();
+      return loadSc('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js').then(go);
+    }).catch(function(e){if(onStat)onStat('Error: '+e.message);});
+  }else{if(onStat)onStat('Use .txt, .pdf, or .docx');}
+}
+function loadSc(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+
+function callAPI(body,cb){
+  fetch('/api/query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+  .then(function(r){return r.json();}).then(function(d){if(d.ok)cb(null,d.answer);else cb(d.error||'Error');})
+  .catch(function(e){cb(e.message);});
+}
+
+function buildMsgs(){
+  var out=[],corpus=docs.map(function(d){return '--- '+d.t+' ---\n'+d.c;}).join('\n\n');
+  for(var i=0;i<msgs.length;i++){
+    var m=msgs[i],c=m.content;
+    if(i===0&&corpus)c='My uploaded documents:\n\n'+corpus+'\n\n'+m.content;
+    out.push({role:m.r,content:c});
+  }
+  return out;
+}
+function sendQ(q){
+  if(!q||!pw)return;
+  document.getElementById('QI').value='';
+  document.getElementById('QI').style.height='50px';
+  document.getElementById('AKB').disabled=true;
+  var ca=document.getElementById('CA'),w=ca.querySelector('.wc');if(w)w.remove();
+  addMsg('you',q);msgs.push({r:'user',content:q,d:q});
+  var tk=addTk();
+  callAPI({messages:buildMsgs(),documents:docs},function(err,ans){
+    tk.remove();document.getElementById('AKB').disabled=false;
+    if(err){addMsg('sch','Something went wrong. Please try again.');return;}
+    addMsg('sch',ans);msgs.push({r:'assistant',content:ans,d:ans});saveSess();renderH();
+  });
+}
+function addMsg(who,text){
+  var ca=document.getElementById('CA'),d=document.createElement('div');
+  d.className='msg '+(who==='you'?'my':'ms');
+  if(who==='sch'){
+    var l=document.createElement('div');l.className='ml';l.textContent='\u2726 The Scholar';d.appendChild(l);
+    var parts=text.split(/\n\n+/);
+    for(var i=0;i<parts.length;i++){if(parts[i].trim()){var p=document.createElement('p');p.textContent=parts[i].trim();d.appendChild(p);}}
+  }else d.textContent=text;
+  ca.appendChild(d);ca.scrollTop=ca.scrollHeight;return d;
+}
+function addTk(){
+  var ca=document.getElementById('CA'),d=document.createElement('div');
+  d.className='tk';d.innerHTML='<span>Searching the canon</span><span class="dots"><span></span><span></span><span></span></span>';
+  ca.appendChild(d);ca.scrollTop=ca.scrollHeight;return d;
+}
+function renderRes(el,text){
+  el.innerHTML='';var parts=text.split(/\n\n+/);
+  for(var i=0;i<parts.length;i++){if(parts[i].trim()){var p=document.createElement('p');p.textContent=parts[i].trim();el.appendChild(p);}}
+  el.style.display='block';
+}
+
+function lookup(){
+  var ref=document.getElementById('SRI').value.trim();if(!ref)return;
+  var btn=document.getElementById('LUB');btn.disabled=true;btn.textContent='Looking up...';
+  var prompt='Look up this scripture reference: '+ref+'\n\n1) Quote the full verse(s) from KJV or LDS Standard Works. 2) Explain its significance to the theocentric cosmological thesis. 3) Note related passages.';
+  callAPI({question:prompt,documents:[]},function(err,ans){
+    btn.disabled=false;btn.textContent='Look Up';
+    if(err)return;renderRes(document.getElementById('SRR'),ans);
+  });
+}
+
+function runW(mode){
+  var draft=document.getElementById('DI').value.trim();if(!draft){alert('Paste a draft first.');return;}
+  document.querySelectorAll('.wtb').forEach(function(b){b.disabled=true;});
+  var wo=document.getElementById('WO');wo.innerHTML='<p style="color:var(--td);font-style:italic">Working...</p>';
+  var prompts={
+    s:'Strengthen this draft. Make the argument tighter, more declarative, more grounded in scripture. Preserve Ez\'s voice exactly: direct, prosecutorial when needed, never over-smooth. Return the improved version:\n\n'+draft,
+    f:'Check this draft for weaknesses. List numbered issues: arguments not fully supported, claims needing more scriptural grounding, logical gaps, places the argument could be stronger:\n\n'+draft,
+    v:'Rewrite this draft to better match Ez\'s voice: direct, declarative, prosecutorial when needed, always grounded in scripture, never academic. Keep all arguments but sharpen the delivery:\n\n'+draft,
+    c:'Read this as a hostile critic supporting heliocentrism. List every phrase, claim, or argument that could be used against Ez, misquoted, or exploited. Be specific and numbered:\n\n'+draft
+  };
+  callAPI({question:prompts[mode],documents:[]},function(err,ans){
+    document.querySelectorAll('.wtb').forEach(function(b){b.disabled=false;});
+    if(err){wo.innerHTML='<p>Error. Please try again.</p>';return;}
+    renderRes(wo,ans);
+  });
+}
+
+function runScan(){
+  if(!scanC){alert('Load a document first.');return;}
+  var btn=document.getElementById('SCB');btn.disabled=true;btn.textContent='Scanning...';
+  var prompt='Scan this document and produce a numbered audit report. For each issue: 1) Quote the specific text. 2) Explain the problem (weakens argument / concedes heliocentric ground / critic exploit / contradicts other work). 3) Provide a specific rewrite or fix.\n\nDocument: "'+scanT+'"\n\n'+scanC;
+  callAPI({question:prompt,documents:[]},function(err,ans){
+    btn.disabled=false;btn.textContent='Scan Document';
+    if(err)return;renderRes(document.getElementById('SCR'),ans);
+  });
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function autosize(el){el.style.height='50px';el.style.height=Math.min(el.scrollHeight,180)+'px';}
+
+function setupDrop(zid,iid,onFile){
+  var z=document.getElementById(zid);
+  z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('ov');});
+  z.addEventListener('dragleave',function(){z.classList.remove('ov');});
+  z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('ov');if(e.dataTransfer.files[0])onFile(e.dataTransfer.files[0]);});
+  document.getElementById(iid).addEventListener('change',function(){if(this.files[0])onFile(this.files[0]);this.value='';});
+}
+
+window.addEventListener('load',function(){
+  theme();
+  document.getElementById('LB').addEventListener('click',login);
+  document.getElementById('PI').addEventListener('keydown',function(e){if(e.key==='Enter')login();});
+  document.getElementById('LOB').addEventListener('click',logout);
+  document.getElementById('LOB2').addEventListener('click',logout);
+  document.getElementById('THB').addEventListener('click',function(){light=!light;localStorage.setItem('th',light?'l':'d');theme();});
+  document.getElementById('SBT').addEventListener('click',function(){
+    document.getElementById('SB').classList.toggle('open');
+    document.getElementById('OV').classList.toggle('on');
+  });
+  document.getElementById('OV').addEventListener('click',function(){
+    document.getElementById('SB').classList.remove('open');
+    document.getElementById('OV').classList.remove('on');
+  });
+  document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){switchP(this.dataset.p);});});
+  document.getElementById('NCB').addEventListener('click',newChat);
+  document.getElementById('ECB').addEventListener('click',exportChat);
+  document.getElementById('ADB').addEventListener('click',addDoc);
+  document.getElementById('EXP').addEventListener('click',exportCorpus);
+  document.getElementById('IMP').addEventListener('click',function(){document.getElementById('II').click();});
+  document.getElementById('II').addEventListener('change',function(){if(this.files[0])importCorpus(this.files[0]);this.value='';});
+  document.getElementById('BR').addEventListener('click',function(){document.getElementById('FI').click();});
+  setupDrop('DZ','FI',function(file){
+    procFile(file,function(text,name){
+      var t=document.getElementById('DT');if(!t.value)t.value=name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');
+      document.getElementById('DC').value=text;setStat('Ready - click Add to Corpus');
+    },setStat);
+  });
+  document.getElementById('AKB').addEventListener('click',function(){var q=document.getElementById('QI').value.trim();if(q)sendQ(q);});
+  document.getElementById('QI').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();var q=this.value.trim();if(q)sendQ(q);}});
+  document.getElementById('QI').addEventListener('input',function(){autosize(this);});
+  document.getElementById('LUB').addEventListener('click',lookup);
+  document.getElementById('SRI').addEventListener('keydown',function(e){if(e.key==='Enter')lookup();});
+  document.getElementById('WS').addEventListener('click',function(){runW('s');});
+  document.getElementById('WF').addEventListener('click',function(){runW('f');});
+  document.getElementById('WV').addEventListener('click',function(){runW('v');});
+  document.getElementById('WC').addEventListener('click',function(){runW('c');});
+  document.getElementById('SBR').addEventListener('click',function(){document.getElementById('SFI').click();});
+  setupDrop('SDZ','SFI',function(file){
+    procFile(file,function(text,name){
+      scanC=text;scanT=name.replace(/\.[^.]+$/,'');
+      var slo=document.getElementById('SLO');slo.textContent='Loaded: '+scanT;slo.style.display='block';
+      document.getElementById('SCB').disabled=false;
+    });
+  });
+  document.getElementById('SCB').addEventListener('click',runScan);
+  var saved=sessionStorage.getItem('tp');
+  if(saved){pw=saved;document.getElementById('LW').style.display='none';document.getElementById('APP').classList.add('on');sid='s'+Date.now();renderDocs();renderH();newChat();}
+});
+</script>
+</body>
+</html>
